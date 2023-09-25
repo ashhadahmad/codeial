@@ -1,9 +1,26 @@
 const User = require("../models/user");
 
 module.exports.profile = function (req, res) {
-  res.render("user_profile", {
-    title: "Codeial | User Profile",
-  });
+  if (req.cookies.user_id) {
+    User.findById(req.cookies.user_id)
+      .exec()
+      .then((user) => {
+        if (user) {
+          return res.render("user_profile", {
+            title: "Codeial | User Profile",
+            user: user,
+          });
+        } else {
+          return res.redirect("/users/sign-in");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        return res.redirect("/users/sign-in");
+      });
+  } else {
+    return res.redirect("/users/sign-in");
+  }
 };
 
 // Render Sign Up Page
@@ -54,5 +71,30 @@ module.exports.createUser = function (req, res) {
 
 // Sign in and get the session
 module.exports.createSession = function (req, res) {
-  // Todo: Sign in User
+  // Find the user
+  User.findOne({ email: req.body.email })
+    .exec()
+    .then(function (user) {
+      // Handle user not found
+      if (user == null) {
+        return res.redirect("back");
+      }
+      // Handle user found
+      // Handle password mismatch
+      if (req.body.password != user.password) {
+        return res.redirect("back");
+      }
+      // Match Passwords
+      // Handle session creation
+      res.cookie("user_id", user.id);
+      return res.redirect("/users/profile");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+module.exports.signOut = function (req, res) {
+  res.clearCookie("user_id");
+  res.redirect("/users/sign-in");
 };
