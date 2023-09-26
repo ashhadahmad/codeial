@@ -5,3 +5,5 @@ mongoose
     console.log("🟩 Successfully connected to DB");
   })
   .catch((error) => console.log("❌ Error connecting to the db", error));
+
+module.exports = mongoose.connection;
