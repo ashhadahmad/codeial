@@ -2,7 +2,7 @@ const User = require("../models/user");
 
 module.exports.profile = function (req, res) {
   res.render("user_profile", {
-    title: "Codeial | User Profile",
+    title: "Codeial | Profile",
   });
 };
 
@@ -22,7 +22,7 @@ module.exports.signIn = function (req, res) {
     return res.redirect("/users/profile");
   }
   res.render("user_sign_in", {
-    title: "Codeial | SignUp",
+    title: "Codeial | SignIn",
   });
 };
 

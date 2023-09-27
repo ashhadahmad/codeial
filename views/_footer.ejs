@@ -1,1 +1,27 @@
-<footer>Page Footer</footer>
+<footer class="footer">
+  <div class="footer-content responsive-wrapper">
+    <div class="footer-col">
+      <div class="page-logo">
+        <a href="/">
+          <div>
+            <img src="/svg/logo.svg" />
+          </div>
+          <div class="page-title footer-title">Codeial</div>
+        </a>
+      </div>
+      <div class="copyright-info">&copy; Ashhad. All Rights Reserved.</div>
+    </div>
+    <div class="footer-col">
+      <div class="footer-menu">
+        <a href="/">Home</a>
+        <%if(locals.user) {%>
+        <a href="/users/profile"> Profile </a>
+        <a href="/users/sign-out"> Sign Out </a>
+        <%} else {%>
+        <a href="/users/sign-in"> Sign In </a>
+        <a href="/users/sign-up"> Sign Up </a>
+        <%}%>
+      </div>
+    </div>
+  </div>
+</footer>
