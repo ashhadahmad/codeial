@@ -37,7 +37,7 @@
   margin-bottom: 0.75em; }
   .data-form .form-input::placeholder {
     color: var(--c-text-secondary); }
-  .data-form .form-input:focus, .data-form .form-input:hover {
+  .data-form .form-input:focus {
     border-color: var(--c-text-secondary); }
 
 .data-form .submit-btn {

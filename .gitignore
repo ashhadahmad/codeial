@@ -145,3 +145,4 @@ dist
 
 # VS Code workspace
 codeial.code-workspace
+**/.DS_Store

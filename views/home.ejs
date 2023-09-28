@@ -1,1 +1,22 @@
-<h1>Content</h1>
+<div class="responsive-wrapper">
+  <section class="feed-posts">Posts</section>
+  <%if (locals.user) {%>
+  <form action="/posts/create" class="new-post-form" method="post">
+    <textarea
+      name="content"
+      cols="30"
+      rows="3"
+      placeholder="Type here..."
+    ></textarea>
+    <input type="submit" value="Post" />
+    <%}%>
+    <div class="post">
+      <div class="post-content">
+        <%for(let post of posts){%>
+        <p><%=post.content%></p>
+        <p><%=post.user.name%></p>
+        <%}%>
+      </div>
+    </div>
+  </form>
+</div>
