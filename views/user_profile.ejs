@@ -1,6 +1,32 @@
 <link rel="stylesheet" type="text/css" href="/css/user_profile.css" />
 <div class="responsive-wrapper">
-  <h1>Codeial / Profile Page</h1>
-  <p><%=user.name%></p>
-  <p><%=user.email%></p>
+  <%if(locals.user && locals.user.id == profile_user.id) {%>
+  <div class="user-update-form">
+    <form action="/users/update/<%=profile_user.id%>" method="post">
+      <label for="form-update-name">Name</label>
+      <input
+        type="text"
+        name="name"
+        id="form-update-name"
+        value="<%=profile_user.name%>"
+        required
+      />
+      <label for="form-update-email">Email</label>
+      <input
+        type="email"
+        name="email"
+        id="form-update-email"
+        value="<%=profile_user.email%>"
+        required
+      />
+      <input type="submit" value="Update" />
+    </form>
+  </div>
+  <%} else {%>
+  <div class="user-details-box">
+    <h1>Codeial / Profile Page</h1>
+    <p><%=profile_user.name%></p>
+    <p><%=profile_user.email%></p>
+  </div>
+  <%}%>
 </div>

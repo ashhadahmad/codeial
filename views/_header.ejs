@@ -14,9 +14,9 @@
       </div>
       <div class="header-navigation-right-links">
         <%if(locals.user) {%>
-        <a href="/users/profile"> Profile </a>
+        <a href="/users/profile/<%=locals.user.id%>"> Profile </a>
         <a href="/users/sign-out"> Sign Out </a>
-        <a href="/users/profile" class="avatar">
+        <a href="/users/profile/<%=locals.user.id%>" class="avatar">
           <img src="/images/avatar.png" alt="Avatar" />
         </a>
         <%} else {%>

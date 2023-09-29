@@ -34,12 +34,10 @@ module.exports.destoryComment = function (req, res) {
         let postId = comment.post;
         Comment.deleteOne({ _id: req.params.id })
           .then(function (val) {
-            console.log(val);
             Post.findByIdAndUpdate(postId, {
               $pull: { comments: req.params.id },
             })
               .then(function (val) {
-                console.log(val);
                 res.redirect("back");
               })
               .catch(function (err) {

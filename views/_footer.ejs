@@ -15,7 +15,7 @@
       <div class="footer-menu">
         <a href="/">Home</a>
         <%if(locals.user) {%>
-        <a href="/users/profile"> Profile </a>
+        <a href=/users/profile/<%=locals.user.id%>> Profile </a>
         <a href="/users/sign-out"> Sign Out </a>
         <%} else {%>
         <a href="/users/sign-in"> Sign In </a>
