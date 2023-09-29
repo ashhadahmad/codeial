@@ -91,7 +91,6 @@
   border-radius: 8px;
   line-height: 1;
   border: 2px solid var(--c-border-primary);
-  color: var(--c-text-action);
   transition: 0.15s ease;
   background-color: var(--c-background-primary); }
   .header-button i {

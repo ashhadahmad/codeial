@@ -1,9 +1,19 @@
-<div class="comment-content">
-  <p><%=comment.content%></p>
-  <p><%=comment.user.name%></p>
-  <%if(locals.user && locals.user.id == comment.user.id) {%>
-  <div class="delete-comment">
-    <a href="/comments/destroy/<%= comment.id %>"> X </a>
+<article class="comment">
+  <div class="comment-header">
+    <a href="">
+      <span><img src="/images/avatar.png" /></span>
+      <div class="comment-metadata">
+        <div class="comment-user"><%=comment.user.name%></div>
+        <div class="comment-time">30th Sept</div>
+      </div>
+    </a>
+    <%if(locals.user && locals.user.id == comment.user.id) {%>
+    <a href="/comments/destroy/<%= comment.id %>" class="comment-footer-item">
+      <i class="ph-bold ph-trash"></i>
+    </a>
+    <%}%>
   </div>
-  <%}%>
-</div>
+  <div class="comment-body">
+    <p><%=comment.content%></p>
+  </div>
+</article>

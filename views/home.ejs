@@ -1,20 +1,130 @@
 <div class="responsive-wrapper">
   <section class="feed-posts">Posts</section>
   <%if (locals.user) {%>
-  <form action="/posts/create" class="new-post-form" method="post">
-    <textarea
-      name="content"
-      cols="30"
-      rows="3"
-      placeholder="Type here..."
-      required
-    ></textarea>
-    <input type="submit" value="Post" />
-  </form>
+  <div class="content-input-section">
+    <form action="/posts/create" class="new-post-form" method="post">
+      <textarea
+        name="content"
+        cols="30"
+        rows="3"
+        placeholder="Type here..."
+        required
+      ></textarea>
+      <input type="submit" value="Post" />
+    </form>
+  </div>
   <%}%>
+
+  <!-- <article class="card">
+          <div class="card-header">
+            <a href="/users/profile/651196872fe0bedb175975c4">
+              <span
+                ><img src="https://assets.codepen.io/285131/zeplin.svg"
+              /></span>
+              <div class="card-metadata">
+                <div class="card-user">Github</div>
+                <div class="card-time">30th Sept</div>
+              </div>
+            </a>
+          </div>
+          <div class="card-body">
+            <p>Collaboration between designers and developers.</p>
+          </div>
+          <div class="card-footer">
+            <div class="footer-left-items">
+              <a href="#" class="card-footer-item">
+                <i class="ph-bold ph-heart"></i>
+                Like
+              </a>
+              <a href="#" class="card-footer-item">
+                <i class="ph-bold ph-chat-circle-text"></i>
+                Comment
+              </a>
+            </div>
+            <div class="footer-right-items post-delete-btn">
+              <a href="#" class="card-footer-item">
+                <i class="ph-bold ph-trash"></i>
+                Delete
+              </a>
+            </div>
+          </div>
+          <div class="comment-box"></div>
+          <div class="comments">
+            <article class="comment">
+              <div class="comment-header">
+                <a href="/users/profile/651196872fe0bedb175975c4">
+                  <span
+                    ><img src="https://assets.codepen.io/285131/zeplin.svg"
+                  /></span>
+                  <div class="comment-metadata">
+                    <div class="comment-user">Github</div>
+                    <div class="comment-time">30th Sept</div>
+                  </div>
+                </a>
+                <a href="#" class="comment-footer-item">
+                  <i class="ph-bold ph-trash"></i>
+                </a>
+              </div>
+              <div class="comment-body">
+                <p>Link pull requests and automate workflows.</p>
+              </div>
+            </article>
+            <article class="comment">
+              <div class="comment-header">
+                <a href="/users/profile/651196872fe0bedb175975c4">
+                  <span
+                    ><img src="https://assets.codepen.io/285131/zeplin.svg"
+                  /></span>
+                  <div class="comment-metadata">
+                    <div class="comment-user">Github</div>
+                    <div class="comment-time">30th Sept</div>
+                  </div>
+                </a>
+                <a href="#" class="comment-footer-item">
+                  <i class="ph-bold ph-trash"></i>
+                </a>
+              </div>
+              <div class="comment-body">
+                <p>Comment 2</p>
+              </div>
+            </article>
+          </div>
+        </article> -->
+  <!-- <article class="card">
+          <div class="card-header">
+            <a href="/users/profile/651196872fe0bedb175975c4">
+              <span
+                ><img src="https://assets.codepen.io/285131/zeplin.svg"
+              /></span>
+              <div class="card-metadata">
+                <div class="card-user">Github</div>
+                <div class="card-time">30th Sept</div>
+              </div>
+            </a>
+          </div>
+          <div class="card-body">
+            <p>
+              Collaboration between designers and developers. Collaboration
+              between designers and developers. Collaboration between designers
+              and developers. Collaboration between designers and developers.
+              Collaboration between designers and developers. Collaboration
+              between designers and developers. Collaboration between designers
+              and developers. Collaboration between designers and developers.
+              Collaboration between designers and developers.
+            </p>
+          </div>
+        </article> -->
+
   <div class="post">
     <div class="post-content">
-      <%for(let post of posts){%> <%- include('_post', {post: post})-%> <%}%>
+      <div class="content">
+        <div class="content-main">
+          <div class="card-grid">
+            <%for(let post of posts){%> <%- include('_post', {post: post})-%>
+            <%}%>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="friend-content">
       <h3>Friends</h3>
