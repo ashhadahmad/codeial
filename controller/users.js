@@ -1,16 +1,17 @@
 const User = require("../models/user");
 
-// module.exports.profileBlank = function (req, res) {
-//   res.redirect(`/users/profile/${req.user._id}`);
-// };
-
 module.exports.profile = function (req, res) {
-  User.findById(req.params.id).then(function (profile_user) {
-    return res.render("user_profile", {
-      title: `Codeial | Profile`,
-      profile_user: profile_user,
+  User.findById(req.params.id)
+    .then(function (profile_user) {
+      return res.render("user_profile", {
+        title: `Codeial | Profile`,
+        profile_user: profile_user,
+      });
+    })
+    .catch(function (err) {
+      console.log("❌❌ Error : ", err);
+      return res.redirect("back");
     });
-  });
 };
 
 // Render Sign Up Page
@@ -34,35 +35,24 @@ module.exports.signIn = function (req, res) {
 };
 
 // Get sign up data
-module.exports.createUser = function (req, res) {
+module.exports.createUser = async function (req, res) {
   // Password and confirm password mismatch
   if (req.body.password != req.body.confirm_password) {
     return res.redirect("back");
   }
   // Check if user already exists
-  User.findOne({ email: req.body.email })
-    .exec()
-    .then(function (val) {
-      if (!val) {
-        const newUser = new User(req.body);
-        newUser
-          .save()
-          .then(function () {
-            console.log("✨✨✨", newUser);
-            res.redirect("/users/sign-in");
-          })
-          .catch((err) => {
-            console.log(err);
-            res.redirect("back");
-          });
-      } else {
-        return res.redirect("/users/sign-in");
-      }
-    })
-    .catch((err) => {
-      console.log(err);
-      return res.redirect("back");
-    });
+  try {
+    const user_db = await User.findOne({ email: req.body.email }).exec();
+    if (user_db) return res.redirect("/users/sign-in");
+    // User does not exist, create it
+    else {
+      await User.create(req.body);
+      res.redirect("/users/sign-in");
+    }
+  } catch (err) {
+    console.log(err);
+    return res.redirect("back");
+  }
 };
 
 // Sign in and get the session
