@@ -1,10 +1,14 @@
 <article class="comment">
   <div class="comment-header">
-    <a href="">
+    <a href="/users/profile/<%=comment.user.id%>">
       <span><img src="/images/avatar.png" /></span>
       <div class="comment-metadata">
         <div class="comment-user"><%=comment.user.name%></div>
-        <div class="comment-time">30th Sept</div>
+        <div class="comment-time">
+          <%if (Date(comment.createdAt) == Date(comment.updatedAt)) {%>
+          <%=comment.createdAt%><%} else {%> <%=comment.updatedAt%> (Updated)
+          <%}%>
+        </div>
       </div>
     </a>
     <%if(locals.user && locals.user.id == comment.user.id) {%>

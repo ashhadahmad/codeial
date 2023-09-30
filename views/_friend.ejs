@@ -1,3 +1,10 @@
-<div>
-  <a href="/users/profile/<%=friend.id%>"><%=friend.name%></a>
-</div>
+<link rel="stylesheet" type="text/css" href="/css/friend.css" />
+
+<a href="/users/profile/<%=friend.id%>" class="friend-card">
+  <div class="friend-card-header">
+    <span><img src="/images/avatar.png" /></span>
+    <div class="card-metadata">
+      <div class="card-user"><%=friend.name%></div>
+    </div>
+  </div>
+</a>

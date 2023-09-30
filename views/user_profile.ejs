@@ -1,32 +1,44 @@
-<link rel="stylesheet" type="text/css" href="/css/user_profile.css" />
-<div class="responsive-wrapper">
-  <%if(locals.user && locals.user.id == profile_user.id) {%>
-  <div class="user-update-form">
-    <form action="/users/update/<%=profile_user.id%>" method="post">
-      <label for="form-update-name">Name</label>
-      <input
-        type="text"
-        name="name"
-        id="form-update-name"
-        value="<%=profile_user.name%>"
-        required
-      />
-      <label for="form-update-email">Email</label>
-      <input
-        type="email"
-        name="email"
-        id="form-update-email"
-        value="<%=profile_user.email%>"
-        required
-      />
-      <input type="submit" value="Update" />
-    </form>
+<link rel="stylesheet" type="text/css" href="/css/auth.css" />
+
+<div class="auth-main">
+  <div class="auth-card">
+    <%if(locals.user && locals.user.id == profile_user.id) {%>
+
+    <h1 class="auth-card-header">Update</h1>
+    <div class="auth-card-body">
+      <form
+        action="/users/update/<%=profile_user.id%>"
+        method="POST"
+        class="data-form"
+      >
+        <input
+          type="text"
+          name="name"
+          id="form-update-name"
+          value="<%=profile_user.name%>"
+          class="form-input"
+          required
+        />
+
+        <input
+          type="email"
+          name="email"
+          id="form-update-email"
+          value="<%=profile_user.email%>"
+          class="form-input"
+          required
+        />
+        <input type="submit" class="submit-btn" value="Update" />
+      </form>
+    </div>
+    <%} else {%>
+    <h1 class="auth-card-header">Profile</h1>
+    <div class="auth-card-body">
+      <p>Name: <%=profile_user.name%></p>
+      <p>Email: <%=profile_user.email%></p>
+    </div>
+    <%}%>
   </div>
-  <%} else {%>
-  <div class="user-details-box">
-    <h1>Codeial / Profile Page</h1>
-    <p><%=profile_user.name%></p>
-    <p><%=profile_user.email%></p>
-  </div>
-  <%}%>
+
+  <div class="user-details-box"></div>
 </div>
