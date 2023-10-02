@@ -7,13 +7,14 @@ passport.use(
   new LocalStrategy(
     {
       usernameField: "email",
+      passReqToCallback: true,
     },
-    function (email, password, done) {
+    function (req, email, password, done) {
       //  Find a user and establish the identity
       User.findOne({ email: email })
         .then((user) => {
           if (!user || user.password != password) {
-            console.log("User / Password incorrect");
+            req.flash("error", "Invalid Username/Password");
             return done(null, false);
           }
           return done(null, user);

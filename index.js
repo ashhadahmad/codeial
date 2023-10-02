@@ -13,7 +13,7 @@ const MongoStore = require("connect-mongo");
 const mongoose = require("mongoose");
 const sassMiddleware = require("node-sass-middleware");
 const flash = require("connect-flash");
-const flashMiddleware = require("./config/flash-middleware");
+const customMiddleware = require("./config/custom-middleware");
 
 // Setup the express app
 const app = express();
@@ -66,7 +66,7 @@ app.use(passport.session());
 app.use(passport.setAuthenticatedUser);
 
 app.use(flash());
-app.use(flashMiddleware.setFlash);
+app.use(customMiddleware.setFlash);
 
 // Use the express router
 app.use("/", require("./routes"));

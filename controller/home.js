@@ -19,7 +19,7 @@ module.exports.home = async function (req, res) {
       all_users: users,
     });
   } catch (err) {
-    console.log("❌❌ Error : ", err);
+    req.flash("error", err);
     res.redirect("back");
   }
 };

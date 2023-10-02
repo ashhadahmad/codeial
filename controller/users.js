@@ -38,6 +38,7 @@ module.exports.signIn = function (req, res) {
 module.exports.createUser = async function (req, res) {
   // Password and confirm password mismatch
   if (req.body.password != req.body.confirm_password) {
+    req.flash("error", "Password mismatch!");
     return res.redirect("back");
   }
   // Check if user already exists
@@ -47,10 +48,11 @@ module.exports.createUser = async function (req, res) {
     // User does not exist, create it
     else {
       await User.create(req.body);
+      req.flash("success", "Successfully signed up!");
       res.redirect("/users/sign-in");
     }
   } catch (err) {
-    console.log(err);
+    req.flash("error", err);
     return res.redirect("back");
   }
 };
@@ -79,13 +81,15 @@ module.exports.update = function (req, res) {
       email: req.body.email,
     })
       .then(function (user) {
+        req.flash("success", "Details updated!");
         return res.redirect("back");
       })
       .catch(function (err) {
-        console.log(err);
+        req.flash("error", err);
         return res.redirect("back");
       });
   } else {
+    req.flash("error", "You cannot update the details!");
     res.status(401).send("Unauthorized");
   }
 };
