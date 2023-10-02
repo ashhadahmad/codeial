@@ -6,7 +6,11 @@
     <title><%= title %></title>
     <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
-
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
     <link rel="stylesheet" type="text/css" href="/css/layout.css" />
     <link rel="stylesheet" type="text/css" href="/css/header.css" />
     <link rel="stylesheet" type="text/css" href="/css/footer.css" />
@@ -16,6 +20,27 @@
     <%- include('_header'); %>
 
     <main class="main"><%- body %></main>
-    <%- include('_footer');%> <%- script %>
+    <%- include('_footer');%> <%- script %> <% if (flash.success &&
+    flash.success.length > 0) {%>
+    <script>
+      new Noty({
+        theme: "bootstrap-v4",
+        text: "<%= flash.success %>",
+        type: "success",
+        layout: "topRight",
+        timeout: 1500,
+      }).show();
+    </script>
+    <% } %> <% if (flash. error && flash.error.length > 0) {%>
+    <script>
+      new Noty({
+        theme: "bootstrap-v4",
+        text: "<%= flash.error %>",
+        type: "error",
+        layout: "topRight",
+        timeout: 1500,
+      }).show();
+    </script>
+    <% } %>
   </body>
 </html>
