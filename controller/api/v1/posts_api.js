@@ -23,17 +23,18 @@ module.exports.destoryPost = async function (req, res) {
   try {
     const post = await Post.findById(req.params.id).exec();
     // Req.user.id has the ID of the user
-    // if (post.user == req.user.id) {
-    await Post.deleteOne({ _id: post.id });
-    await Comment.deleteMany({ post: req.params.id });
-    return res.status(200).json({
-      post_id: req.params.id,
-      message: "Post deleted!",
-    });
-    // } else {
-    //   req.flash("error", "You cannot delete this post");
-    //   return res.redirect("back");
-    // }
+    if (post.user == req.user.id) {
+      await Post.deleteOne({ _id: post.id });
+      await Comment.deleteMany({ post: req.params.id });
+      return res.status(200).json({
+        post_id: req.params.id,
+        message: "Post deleted!",
+      });
+    } else {
+      return res.json(401, {
+        message: "You cannot delete this post",
+      });
+    }
   } catch (err) {
     console.log(err);
     return res.json(500, {
