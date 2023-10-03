@@ -4,11 +4,13 @@ const User = require("../models/user");
 module.exports.home = async function (req, res) {
   try {
     const posts = await Post.find({})
+      .sort({ createdAt: -1 })
       .populate("user")
       .populate({
         path: "comments",
         populate: {
           path: "user",
+          options: { sort: { createdAt: 1 } },
         },
       })
       .exec();

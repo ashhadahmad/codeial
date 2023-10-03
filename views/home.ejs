@@ -3,7 +3,7 @@
   <%if (locals.user) {%>
   <div class="content-input-section">
     <div class="content-input-wrapper">
-      <form action="/posts/create" class="new-post-form" method="post">
+      <form class="new-post-form" id="new-post-form" method="post">
         <textarea
           name="content"
           cols="30"
@@ -21,7 +21,7 @@
     <div class="content-main">
       <div class="content-group-cards">
         <div class="content-heading">Posts</div>
-        <div class="card-grid">
+        <div class="card-grid" id="post-list-container">
           <%for(let post of posts){%> <%- include('_post', {post: post})-%>
           <%}%>
         </div>
@@ -36,3 +36,4 @@
     </div>
   </div>
 </div>
+<script src="/js/home_posts.js"></script>

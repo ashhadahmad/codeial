@@ -1,6 +1,6 @@
 <link rel="stylesheet" type="text/css" href="/css/post.css" />
 
-<article class="card">
+<article id="post-<%=post._id%>" class="card">
   <div class="card-header">
     <a href="/users/profile/<%=post.user.id%>">
       <span><img src="/images/avatar.png" /></span>
@@ -26,7 +26,11 @@
     </div>
     <%if (locals.user && locals.user.id == post.user.id) {%>
     <div class="footer-right-items post-delete-btn">
-      <a href="/posts/destroy/<%= post.id %>" class="card-footer-item">
+      <a
+        href="/posts/destroy/<%= post.id %>"
+        class="card-footer-item"
+        id="delete-post-btn"
+      >
         <i class="ph-bold ph-trash"></i>
         Delete
       </a>
