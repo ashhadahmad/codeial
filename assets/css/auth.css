@@ -71,3 +71,8 @@
     margin-left: 1.5rem; }
   .data-form a:hover, .data-form a:focus {
     color: var(--c-accent-primary); }
+
+.form-input-upload {
+  padding: 5px 10px !important;
+  margin: 0px;
+  border: none; }

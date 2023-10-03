@@ -10,7 +10,14 @@
         action="/users/update/<%=profile_user.id%>"
         method="POST"
         class="data-form"
+        enctype="multipart/form-data"
       >
+        <input
+          type="file"
+          name="avatar"
+          class="form-input form-input-upload"
+          placeholder="Profile picture"
+        />
         <input
           type="text"
           name="name"

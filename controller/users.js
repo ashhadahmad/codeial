@@ -1,4 +1,6 @@
 const User = require("../models/user");
+const path = require("path");
+const fs = require("fs");
 
 module.exports.profile = function (req, res) {
   User.findById(req.params.id)
@@ -74,22 +76,36 @@ module.exports.destroySession = function (req, res) {
   });
 };
 
-module.exports.update = function (req, res) {
-  if (req.params.id == req.user.id) {
-    User.findByIdAndUpdate(req.params.id, {
-      name: req.body.name,
-      email: req.body.email,
-    })
-      .then(function (user) {
-        req.flash("success", "Details updated!");
-        return res.redirect("back");
-      })
-      .catch(function (err) {
-        req.flash("error", err);
-        return res.redirect("back");
-      });
-  } else {
-    req.flash("error", "You cannot update the details!");
-    res.status(401).send("Unauthorized");
+module.exports.update = async function (req, res) {
+  try {
+    if (req.params.id != req.user.id) throw 401;
+    const user = await User.findById(req.params.id);
+
+    User.uploadedAvatar(req, res, function (err) {
+      if (err) {
+        console.log("***** MulterError", err);
+      }
+      user.name = req.body.name;
+      user.email = req.body.email;
+      if (req.file) {
+        // If user already has an avatar, delete it
+        if (user.avatar) {
+          const filePath = path.join(__dirname, "..", user.avatar);
+          if (fs.existsSync(filePath)) fs.unlinkSync(filePath);
+        }
+
+        user.avatar = User.avatarPath + "/" + req.file.filename;
+      }
+      console.log(user);
+      user.save();
+      req.flash("success", "Details updated!");
+      return res.redirect("back");
+    });
+  } catch (err) {
+    if (err == 401) {
+      req.flash("error", "You cannot update the details!");
+      return res.status(401).send("Unauthorized");
+    }
+    return res.redirect("back");
   }
 };

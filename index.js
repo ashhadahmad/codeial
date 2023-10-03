@@ -34,6 +34,8 @@ app.use(cookieParser());
 
 // Use Assets from /assets
 app.use(express.static("assets"));
+// Make the uploads path available to the user
+app.use("/uploads", express.static(__dirname + "/uploads"));
 
 app.use(expressLayouts);
 // Extract styles and scripts from sub pages into the layout
