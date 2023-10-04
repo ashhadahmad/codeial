@@ -2,7 +2,11 @@
 
 <a href="/users/profile/<%=friend.id%>" class="friend-card">
   <div class="friend-card-header">
+    <%if(friend.avatar) {%>
+    <span><img src="<%=friend.avatar%>" /></span>
+    <%}else {%>
     <span><img src="/images/avatar.png" /></span>
+    <%}%>
     <div class="card-metadata">
       <div class="card-user"><%=friend.name%></div>
     </div>

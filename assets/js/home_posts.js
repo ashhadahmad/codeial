@@ -9,7 +9,8 @@
         url: "/posts/create",
         data: newPostForm.serialize(),
         success: function (data) {
-          const newPost = createNewPostDOM(data.data.post);
+          console.log(data);
+          const newPost = createNewPostDOM(data.data.post, data.data.user);
           $("#post-list-container").prepend(newPost);
           deletePost($(" #delete-post-btn", newPost));
         },
@@ -21,13 +22,15 @@
   };
 
   //   Method to create a new post in DOM
-  let createNewPostDOM = function (post) {
+  let createNewPostDOM = function (post, user) {
     return $(`<article id="post-${post._id}" class="card">
     <div class="card-header">
-      <a href="/users/profile/${post.user.id}">
-        <span><img src="/images/avatar.png" /></span>
+      <a href="/users/profile/${user.id}">
+        <span><img src="${
+          user.avatar ? user.avatar : "images/avatar.png"
+        }" /></span>
         <div class="card-metadata">
-          <div class="card-user">${post.user.name}</div>
+          <div class="card-user">${user.name}</div>
           <div class="card-time">${post.createdAt}</div>
         </div>
       </a>
@@ -47,7 +50,9 @@
         </a>
       </div>
       <div class="footer-right-items post-delete-btn">
-        <a href="/posts/destroy/${post._id}" id="delete-post-btn" class="card-footer-item">
+        <a href="/posts/destroy/${
+          post._id
+        }" id="delete-post-btn" class="card-footer-item">
           <i class="ph-bold ph-trash"></i>
           Delete
         </a>

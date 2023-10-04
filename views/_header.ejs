@@ -17,7 +17,8 @@
         <a href="/users/profile/<%=user.id%>"> Profile </a>
         <a href="/users/sign-out"> Sign Out </a>
         <a href="/users/profile/<%=user.id%>" class="avatar">
-          <img src="<%=user.avatar%>" alt="<%=user.name%>" />
+          <img src="<%=(user.avatar ? user.avatar : "/images/avatar.png")%>"
+          alt="<%=user.name%>" />
         </a>
         <%} else {%>
         <a href="/users/sign-in"> Sign In </a>

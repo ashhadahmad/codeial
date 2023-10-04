@@ -3,7 +3,11 @@
 <article id="post-<%=post._id%>" class="card">
   <div class="card-header">
     <a href="/users/profile/<%=post.user.id%>">
+      <%if(post.user.avatar && post.user.avatar.length > 0) {%>
+      <span><img src="<%=post.user.avatar%>" /></span>
+      <%}else {%>
       <span><img src="/images/avatar.png" /></span>
+      <%}%>
       <div class="card-metadata">
         <div class="card-user"><%=post.user.name%></div>
         <div class="card-time"><%=post.createdAt%></div>
