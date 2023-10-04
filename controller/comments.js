@@ -1,17 +1,19 @@
 const Comment = require("../models/comment");
 const Post = require("../models/post");
-
+const commentsMailer = require("../mailers/comment_mailer");
 module.exports.postComment = async function (req, res) {
   try {
     const post = await Post.findById(req.body.post);
-    const newComment = new Comment({
+    const comment = await Comment.create({
       content: req.body.content,
       user: req.user._id,
       post: post._id,
     });
-    const comment = await newComment.save();
     post.comments.push(comment);
-    post.save();
+    await post.save();
+    // comment = await comment.populate("user", "name email").execPopulate();
+    console.log(comment);
+    // commentsMailer.newComment(comment);
     req.flash("success", "Comment published!");
     return res.redirect("back");
   } catch (err) {
