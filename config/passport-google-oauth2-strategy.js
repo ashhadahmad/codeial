@@ -17,7 +17,6 @@ passport.use(
         const user = await User.findOne({
           email: profile.emails[0].value,
         }).exec();
-        console.log(profile);
         // If user exists, set it as req.user
         if (user) return done(null, user);
         else {
