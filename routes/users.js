@@ -9,12 +9,6 @@ router.get(
   usersController.profile
 );
 
-// router.get(
-//   "/profile",
-//   passport.checkAuthentication,
-//   usersController.profileBlank
-// );
-
 router.get("/sign-up", usersController.signUp);
 router.get("/sign-in", usersController.signIn);
 router.get("/sign-out", usersController.destroySession);
@@ -29,6 +23,19 @@ router.post(
   "/update/:id",
   passport.checkAuthentication,
   usersController.update
+);
+
+router.get(
+  "/auth/google",
+  passport.authenticate("google", {
+    scope: ["profile", "email"],
+  })
+);
+
+router.get(
+  "/auth/google/callback",
+  passport.authenticate("google", { failureRedirect: "/user/sign-in" }),
+  usersController.createSession
 );
 
 module.exports = router;
