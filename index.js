@@ -16,14 +16,15 @@ const mongoose = require("mongoose");
 const sassMiddleware = require("node-sass-middleware");
 const flash = require("connect-flash");
 const customMiddleware = require("./config/custom-middleware");
+const env = require("./config/environment");
 
 // Setup the express app
 const app = express();
 
 app.use(
   sassMiddleware({
-    src: path.join(__dirname, "assets/scss"),
-    dest: path.join(__dirname, "assets/css"),
+    src: path.join(__dirname, env.asset_path, "scss"),
+    dest: path.join(__dirname, env.asset_path, "css"),
     debug: true,
     outputStyle: "extended",
     prefix: "/css",
@@ -35,7 +36,7 @@ app.use(express.urlencoded());
 app.use(cookieParser());
 
 // Use Assets from /assets
-app.use(express.static("assets"));
+app.use(express.static(env.asset_path));
 // Make the uploads path available to the user
 app.use("/uploads", express.static(__dirname + "/uploads"));
 
@@ -53,7 +54,7 @@ app.use(
   session({
     name: "codeial",
     // todo : Change the secret before deployment
-    secret: "blahblahblah",
+    secret: env.session_cookie_key,
     saveUninitialized: false,
     resave: false,
     cookie: {
