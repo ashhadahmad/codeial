@@ -14,10 +14,10 @@ const development = {
     },
   },
   google_client_id:
-    "12059870234-sqqhbc62hs1c9n9sd8peds2tugehasaf.apps.googleusercontent.com",
-  google_client_secret: "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",
+    "",
+  google_client_secret: "",
   google_callback_url: "http://localhost:8000/users/auth/google/callback",
-  jwt_secret: "codeial",
+  jwt_secret: "secret-change-before-use",
 };
 
 const production = {
